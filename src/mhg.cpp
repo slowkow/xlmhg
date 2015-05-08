@@ -63,34 +63,6 @@ long double get_hypergeometric_pvalue(long double p, int k, int N, int K, int n)
   return pval;
 }
 
-//' Add two numbers in log space.
-//' @param log_a
-//' @param log_b
-//' @return The sum in log space: log(exp(log_a) + exp(log_b))
-// [[Rcpp::export]]
-double log_add(double log_a, double log_b) {
-  if (log_a < log_b) {
-    std::swap(log_a, log_b);
-  }
-  const double negdelta = log_b - log_a;
-  if (arma::arma_isfinite(negdelta) == false) {
-    return log_a;
-  }
-  return log_a + log1p(exp(negdelta));
-}
-
-double get_hypergeometric_pvalue2(double logp, int k, int N, int K, int n) {
-  long double pval = logp;
-  for (int i = k; i < min(K, n); i++) {
-    logp = logp + log(
-      (long double)( (n - i) * (K - i) ) /
-      (long double)( (i + 1) * (N - K - n + i + 1) )
-    );
-    pval = log_add(pval, logp);
-  }
-  return pval;
-}
-
 //' Compute the minimum hypergeometric score (mHG). It indicates the
 //' probability of the observed density of ones at the beginning of the vector
 //' under the assumption that all possible permutations of the list are equally
