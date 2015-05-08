@@ -1,0 +1,3 @@
+useDynLib(mhg)
+exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)

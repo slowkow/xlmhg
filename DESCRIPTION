@@ -1,0 +1,14 @@
+Package: mhg
+Type: Package
+Title: Non-parametric rank enrichment test for binary data.
+Version: 0.1
+Date: 2015-05-07
+Authors@R: as.person(c(
+    "Kamil Slowikowski <kslowikowski@fas.harvard.edu> [aut, cre]",
+    "Florian Wagner <florian.wagner@duke.edu> [aut]"
+    ))
+Maintainer: Kamil Slowikowski <kslowikowski@fas.harvard.edu>
+Description: More about what it does (maybe more than one line)
+License: GPL (>= 2)
+Imports: Rcpp (>= 0.11.3)
+LinkingTo: Rcpp, RcppArmadillo
