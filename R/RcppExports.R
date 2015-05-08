@@ -68,7 +68,7 @@ log_add <- function(log_a, log_b) {
     .Call('mhg_log_add', PACKAGE = 'mhg', log_a, log_b)
 }
 
-do_mHG_test <- function(v, N, K, L, X, mat, use_upper_bound = FALSE, verbose = FALSE, tolerance = 0.0000000000000001) {
-    .Call('mhg_do_mHG_test', PACKAGE = 'mhg', v, N, K, L, X, mat, use_upper_bound, verbose, tolerance)
+do_mHG_test <- function(v, N, K, L, X, use_upper_bound = FALSE, tolerance = 0.0000000000000001) {
+    .Call('mhg_do_mHG_test', PACKAGE = 'mhg', v, N, K, L, X, use_upper_bound, tolerance)
 }
 

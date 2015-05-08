@@ -110,7 +110,7 @@ int get_mHG(arma::vec v, int N, int K, int L, int X,
   arma::vec &scores, long double tol) {
   
   if (K == 0 || K == N || K < X) {
-    scores[0] = 1.0;
+    scores.at(0) = 1.0;
     return 0;
   }
   
@@ -133,37 +133,24 @@ int get_mHG(arma::vec v, int N, int K, int L, int X,
       p = p * (long double)( (n + 1) * (K - k) ) /
     			(long double)( (N - n) * (k + 1) );
 			k = k + 1;
-//      // Compute a p-value if we have seen enough elements.
-//      if (k >= X) {
-//        pval = get_hypergeometric_pvalue(p, k, N, K, n + 1);
-//        
-//        if (pval < mHG && !is_equal(pval, mHG, tol)) {
-//          mHG = pval;
-//          threshold = n + 1;
-//        }
-//        scores.at(n) = mHG;
-//      }
     }
-//    if (scores.at(n) == 0) {
-//      scores.at(n) = p;
-//    }
+    
+    // Get the probability for k or more successes after n + 1 trials.
     pval = get_hypergeometric_pvalue(p, k, N, K, n + 1);
-    if (k >= X) {
+    scores.at(n) = pval;
+    
+    if (v[n] != 0 && k >= X) {
       if (pval < mHG && !is_equal(pval, mHG, tol)) {
         mHG = pval;
         threshold = n + 1;
       }
     }
-    scores.at(n) = pval;
   }
   
   // We did not see enough ones in the first L elements of v.
   if (threshold == 0) {
     scores.at(0) = 1.0;
   }
-//  else {
-//    scores.at(0) = mHG;
-//  }
   
   return threshold;
 }
@@ -243,9 +230,8 @@ long double get_mHG_pvalue(int N, int K, int L, int X,
 }
 
 // [[Rcpp::export]]
-Rcpp::List do_mHG_test(arma::vec v, int N, int K, int L, int X, arma::mat mat,
-  bool use_upper_bound = false, bool verbose = false,
-  long double tolerance = 0.0000000000000001) {
+Rcpp::List do_mHG_test(arma::vec v, int N, int K, int L, int X,
+  bool use_upper_bound = false, long double tolerance = 0.0000000000000001) {
   
   if (N < 0) stop("Condition not met: N >= 0");
   if (K < 0 || K > N) stop("Condition not met: 0 <= K <= N");
@@ -261,10 +247,6 @@ Rcpp::List do_mHG_test(arma::vec v, int N, int K, int L, int X, arma::mat mat,
   }
   
   arma::mat matrix = arma::mat(K + 1, N - K + 1).fill(0);
-  
-  if (mat.n_rows >= K + 1 && mat.n_cols >= N - K + 1) {
-    matrix = mat;
-  }
   
   int threshold;
   long double mHG, mHG_pvalue;
@@ -304,7 +286,7 @@ Rcpp::List do_mHG_test(arma::vec v, int N, int K, int L, int X, arma::mat mat,
   mHG_double = (double)(mHG);
 
   return Rcpp::List::create(
-    Rcpp::Named("threshold") = threshold + 1,
+    Rcpp::Named("threshold") = threshold,
     // Rcpp::Named("mHG") = mHG_double,
     Rcpp::Named("mHG") = wrap(scores),
     Rcpp::Named("pvalue") = mHG_pvalue_double

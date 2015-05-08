@@ -42,8 +42,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // do_mHG_test
-Rcpp::List do_mHG_test(arma::vec v, int N, int K, int L, int X, arma::mat mat, bool use_upper_bound = false, bool verbose = false, long double tolerance = 0.0000000000000001);
-RcppExport SEXP mhg_do_mHG_test(SEXP vSEXP, SEXP NSEXP, SEXP KSEXP, SEXP LSEXP, SEXP XSEXP, SEXP matSEXP, SEXP use_upper_boundSEXP, SEXP verboseSEXP, SEXP toleranceSEXP) {
+Rcpp::List do_mHG_test(arma::vec v, int N, int K, int L, int X, bool use_upper_bound = false, long double tolerance = 0.0000000000000001);
+RcppExport SEXP mhg_do_mHG_test(SEXP vSEXP, SEXP NSEXP, SEXP KSEXP, SEXP LSEXP, SEXP XSEXP, SEXP use_upper_boundSEXP, SEXP toleranceSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
@@ -53,11 +53,9 @@ BEGIN_RCPP
         Rcpp::traits::input_parameter< int >::type K(KSEXP );
         Rcpp::traits::input_parameter< int >::type L(LSEXP );
         Rcpp::traits::input_parameter< int >::type X(XSEXP );
-        Rcpp::traits::input_parameter< arma::mat >::type mat(matSEXP );
         Rcpp::traits::input_parameter< bool >::type use_upper_bound(use_upper_boundSEXP );
-        Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP );
         Rcpp::traits::input_parameter< long double >::type tolerance(toleranceSEXP );
-        Rcpp::List __result = do_mHG_test(v, N, K, L, X, mat, use_upper_bound, verbose, tolerance);
+        Rcpp::List __result = do_mHG_test(v, N, K, L, X, use_upper_bound, tolerance);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
