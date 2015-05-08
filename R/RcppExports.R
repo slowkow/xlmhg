@@ -23,21 +23,6 @@ NULL
 #' @return Integer 0 or 1.
 NULL
 
-#' Starting with the tail probability of finding some particular number of
-#' successes less than k, update it to the tail probability of finding k or
-#' more successes.
-#' 
-#' This is function is only useful in the context of this package, where we
-#' have split the probability computation across several functions.
-#' 
-#' @param p Probability of exactly k successes.
-#' @param k Number of successes after n draws.
-#' @param N Size of the population.
-#' @param K Number of successes in the population.
-#' @param n Number of draws, without replacement.
-#' @return Numeric between 0 and 1.
-NULL
-
 #' Compute the minimum hypergeometric score (mHG). It indicates the
 #' probability of the observed density of ones at the beginning of the vector
 #' under the assumption that all possible permutations of the list are equally
@@ -55,8 +40,33 @@ NULL
 #' @param tol The tolerance for testing equality of two numbers.
 NULL
 
-#' Compute an XL-mHG p-value.
+#' Compute a minimum hypergeometric (mHG) p-value by dynamic programming.
 NULL
+
+#' Starting with the tail probability of finding some particular number of
+#' successes less than k, update it to the tail probability of finding k or
+#' more successes.
+#' 
+#' This is function is only useful in the context of this package, where we
+#' have split the probability computation across several functions.
+#' 
+#' @param p Probability of exactly k successes.
+#' @param k Number of successes after n draws.
+#' @param N Size of the population.
+#' @param K Number of successes in the population.
+#' @param n Number of draws, without replacement.
+#' @return Numeric between 0 and 1.
+get_hypergeometric_pvalue <- function(p, k, N, K, n) {
+    .Call('mhg_get_hypergeometric_pvalue', PACKAGE = 'mhg', p, k, N, K, n)
+}
+
+#' Add two numbers in log space.
+#' @param log_a
+#' @param log_b
+#' @return The sum in log space: log(exp(log_a) + exp(log_b))
+log_add <- function(log_a, log_b) {
+    .Call('mhg_log_add', PACKAGE = 'mhg', log_a, log_b)
+}
 
 do_mHG_test <- function(v, N, K, L, X, mat, use_upper_bound = FALSE, verbose = FALSE, tolerance = 0.0000000000000001) {
     .Call('mhg_do_mHG_test', PACKAGE = 'mhg', v, N, K, L, X, mat, use_upper_bound, verbose, tolerance)
