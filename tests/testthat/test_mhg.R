@@ -6,60 +6,38 @@ test_that("mhg works", {
   # Successes in the population.
   K <- 100L
   # Only consider enrichments in the first L observations.
-  # L <- N / 4L
-  L <- 400
-  # L <- N
+  L <- N / 4L
   # Require at least X successes in the first L observations.
   X <- 5L
-  # ???
-  mat <- matrix(1)
   
-  set.seed(420)
+  set.seed(42)
+  
+  # This should be significant.
   v <- rep(0, N)
   v[sample(100, 5)] <- 1
-  v[sample(200, 15)] <- 1
-#   v[sample(N, 50)] <- 1
+  v[sample(200, 10)] <- 1
   
-  res <- do_mHG_test(v, N, K, L, X, mat)
+  res <- do_mHG_test(v, N, K, L, X)
   res$pvalue
   
-  fc <- sort(rnorm(N, 0, 1))
+  expect_equal(res$pvalue, 1.810658e-05, tolerance = 1e-6)
   
-  plot_mhg(fc, v, res, L, "GO:123",
-           cex.lab = 2, cex.axis = 1.5, cex.main = 2, cex = 1.5, style = 'h')
+  # This is how you can plot the results.
+#   plot_mhg(
+#     fc = sort(rnorm(N, 0, 1)),
+#     v = v,
+#     res = res,
+#     n = L,
+#     main = "GO:123",
+#     value = bquote("log"[2] ~ "FC"),
+#     cex.lab = 2, cex.axis = 1.5, cex.main = 2, cex = 1.5
+#   )
   
-  # # #
-  
-  # The hypergeometric distribution.
-  dhyper(x = 1, m = K, n = N - K, k = 5)
-  
-  score <- function(k, K, n, N) {
-    sum(sapply(k:min(n, K), function(i) {
-      a <- choose(n, i) * choose(N - n, K - i)
-      b <- choose(N, K)
-      a / b
-    }))
-  }
-  N <- 5000
-  K <- 100
-  sapply(c(1, 10, 100), function(n) round(-log10( score(k = n, K, n, N)) ))
-  sapply(c(1, 10, 100), function(n) round(-log10( score(k = 0, K, n, N)) ))
-  
-  k <- 5
-  n <- 25
-  # Probability of k successes after n trials.
-  p <- dhyper(x = k, m = K, n = N - K, k = n)
-  
-  florian_hg <- function(p, k, K, n, N) {
-    pval <- p
-    for (i in k:min(n, K)) {
-      p <- p * (n - i) * (K - i) / ((i + 1) * (N - K - n + i + 1))
-      pval <- pval + p
-    }
-    pval
-  }
-  score(k, K, n, N)
-  florian_hg(p, k, K, n, N)
+  # This should be non-significant.
+  v <- rep(0, N)
+  v[sample(N, K / 2)] <- 1
 
-  # expect_equal(grab(xs, regex = "\\/", offset = 2), as.character(6:10))
+  res <- do_mHG_test(v, N, K, L, X)
+  
+  expect_equal(res$pvalue, 0.9902327, tolerance = 1e-6)
 })
