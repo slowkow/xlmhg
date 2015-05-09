@@ -16,28 +16,28 @@ test_that("mhg works", {
   v <- rep(0, N)
   v[sample(100, 5)] <- 1
   v[sample(200, 10)] <- 1
+  # v[sample(N, 10)] <- 1
   
-  res <- do_mHG_test(v, N, K, L, X)
-  res$pvalue
+  res <- mhg_test(v, N, K, L, X)
   
   expect_equal(res$pvalue, 1.810658e-05, tolerance = 1e-6)
   
   # This is how you can plot the results.
+#   fc <- sort(rnorm(N, 0, 1))
 #   plot_mhg(
-#     fc = sort(rnorm(N, 0, 1)),
+#     fc = fc,
 #     v = v,
 #     res = res,
 #     n = L,
 #     main = "GO:123",
-#     value = bquote("log"[2] ~ "FC"),
-#     cex.lab = 2, cex.axis = 1.5, cex.main = 2, cex = 1.5
+#     value = bquote("log"[2] ~ "FC")
 #   )
   
   # This should be non-significant.
   v <- rep(0, N)
   v[sample(N, K / 2)] <- 1
 
-  res <- do_mHG_test(v, N, K, L, X)
+  res <- mhg_test(v, N, K, L, X)
   
   expect_equal(res$pvalue, 0.9902327, tolerance = 1e-6)
 })

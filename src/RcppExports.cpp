@@ -6,56 +6,21 @@
 
 using namespace Rcpp;
 
-// get_hypergeometric_pvalue
-long double get_hypergeometric_pvalue(long double p, int k, int N, int K, int n);
-RcppExport SEXP mhg_get_hypergeometric_pvalue(SEXP pSEXP, SEXP kSEXP, SEXP NSEXP, SEXP KSEXP, SEXP nSEXP) {
+// mhg_test
+Rcpp::List mhg_test(arma::vec x, int N, int K, int L, int X, bool upper_bound = false, long double tol = 0.0000000000000001);
+RcppExport SEXP mhg_mhg_test(SEXP xSEXP, SEXP NSEXP, SEXP KSEXP, SEXP LSEXP, SEXP XSEXP, SEXP upper_boundSEXP, SEXP tolSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< long double >::type p(pSEXP );
-        Rcpp::traits::input_parameter< int >::type k(kSEXP );
-        Rcpp::traits::input_parameter< int >::type N(NSEXP );
-        Rcpp::traits::input_parameter< int >::type K(KSEXP );
-        Rcpp::traits::input_parameter< int >::type n(nSEXP );
-        long double __result = get_hypergeometric_pvalue(p, k, N, K, n);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
-END_RCPP
-}
-// log_add
-double log_add(double log_a, double log_b);
-RcppExport SEXP mhg_log_add(SEXP log_aSEXP, SEXP log_bSEXP) {
-BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< double >::type log_a(log_aSEXP );
-        Rcpp::traits::input_parameter< double >::type log_b(log_bSEXP );
-        double __result = log_add(log_a, log_b);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
-END_RCPP
-}
-// do_mHG_test
-Rcpp::List do_mHG_test(arma::vec v, int N, int K, int L, int X, bool use_upper_bound = false, long double tolerance = 0.0000000000000001);
-RcppExport SEXP mhg_do_mHG_test(SEXP vSEXP, SEXP NSEXP, SEXP KSEXP, SEXP LSEXP, SEXP XSEXP, SEXP use_upper_boundSEXP, SEXP toleranceSEXP) {
-BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< arma::vec >::type v(vSEXP );
+        Rcpp::traits::input_parameter< arma::vec >::type x(xSEXP );
         Rcpp::traits::input_parameter< int >::type N(NSEXP );
         Rcpp::traits::input_parameter< int >::type K(KSEXP );
         Rcpp::traits::input_parameter< int >::type L(LSEXP );
         Rcpp::traits::input_parameter< int >::type X(XSEXP );
-        Rcpp::traits::input_parameter< bool >::type use_upper_bound(use_upper_boundSEXP );
-        Rcpp::traits::input_parameter< long double >::type tolerance(toleranceSEXP );
-        Rcpp::List __result = do_mHG_test(v, N, K, L, X, use_upper_bound, tolerance);
+        Rcpp::traits::input_parameter< bool >::type upper_bound(upper_boundSEXP );
+        Rcpp::traits::input_parameter< long double >::type tol(tolSEXP );
+        Rcpp::List __result = mhg_test(x, N, K, L, X, upper_bound, tol);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
