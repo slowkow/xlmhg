@@ -54,6 +54,7 @@ plot_mhg <- function(
     col = "lightgrey",
     border = NA,
     space = 0,
+    names.arg = NA,
     xlab = "Rank",
     ylab = "",
     xaxs = "i",
@@ -84,7 +85,7 @@ plot_mhg <- function(
   y <- -log10( sapply(res$mhg, function(i) ifelse(is.na(i), 1, i)) )
   plot(
     x = xs,
-    y = y,
+    y = y[xs],
     xlab = "",
     xaxt = "n",
     xaxs = "i",
