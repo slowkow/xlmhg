@@ -3,7 +3,9 @@ title: "mhg: Non-parametric Enrichment Test for a Ranked Binary List"
 author: "Kamil Slowikowski"
 date: "`r Sys.Date()`"
 output:
-  html_vignette:
+  rmarkdown::html_vignette:
+    toc: true
+  rmarkdown::pdf_document:
     toc: true
 vignette: >
   %\VignetteIndexEntry{Example for mhg}
