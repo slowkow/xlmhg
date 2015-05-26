@@ -2,9 +2,8 @@
 title: "mhg: Non-parametric Enrichment Test for a Ranked Binary List"
 author: "Kamil Slowikowski"
 date: "`r Sys.Date()`"
+bibliography: mhg.bib 
 output:
-  rmarkdown::html_vignette:
-    toc: true
   rmarkdown::pdf_document:
     toc: true
 vignette: >
@@ -13,11 +12,14 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
+# Abstract
+
 The `mhg` package implements an enrichment test for a ranked binary list. Given
 a ranked binary list of ones and zeros, this package enables you to test if the
-ones are enriched at the beginning of the list.
+ones are enriched at the beginning of the list. The method uses a dynamic
+programming algorithm to obtain an exact permutation p-value.
 
-## Simulation
+# Simulation
 
 Suppose we have a set of $N = 5000$ genes and $K = 100$ of them are annotated
 with a Gene Ontology (GO) term. Further, suppose that we find some subset of
@@ -29,11 +31,20 @@ the GO term is enriched for DE genes.
 A common strategy is to use the hypergeometric distribution to compute
 a probability that we would observe a given number of DE genes annotated with
 a GO term. Suppose we only look at the top $n$ genes with the greatest
-fold-change. Then, the probability is:
+fold-change. Then, the probability to observe exactly $k$ of the $n$ genes
+to be annotated with a GO term is:
 
 $$\text{Prob}(X = k) = \dfrac{\binom{K}{k} \binom{N - K}{n - k}}{\binom{N}{n}}$$
 
-## Algorithm
+The intuition is commonly described in terms of an urn with marbles. Suppose
+there are $N$ marbles, some of which are green and the rest are red. We know
+that $K$ of them are green and $N - K$ are red. We draw $n$ marbles from the
+urn at random and observe that $k$ of them are green and $n - k$ are red. The
+probability to observe exactly $k$ green marbles when we draw $n$ marbles
+is the hypergeometric probability. This is also equivalent to the one-tailed
+version of Fisher's exact test [@Rivals2007-vx].
+
+# Algorithm
 
 The minimum hypergeometric (mHG) algorithm consists of three steps:
 
@@ -42,16 +53,24 @@ The minimum hypergeometric (mHG) algorithm consists of three steps:
 3. Use dynamic programming to compute the exact permutation p-value for
    observing a test statistic at least as extreme by chance.
 
-This algorithm was first described in [Eden et al. 2007][1], and interested
-readers should go to the methods section for more details. A Cython
-implementation of the algorithm was described in [Wagner 2015][2] and is
-available [here][3].
+Eden et al. described the original mHG algorithm in the context of
+transcription factor binding motif enrichments [@Eden2007-af]. The interested
+reader should go to the methods section for more details and mathematical
+proofs.
 
-[1]: http://dx.doi.org/10.1371/journal.pcbi.0030039
-[2]: http://dx.doi.org/10.1101/018705
+Wagner extended the algorithm to be more robust by using two extra parameters
+$X$ and $L$ that limit the number of tests [@Wagner2015-ub]. The $X$ paramter
+requires at least $X$ ones to be present in the beginning of the list. The $L$
+parameter limits testing to the first $L$ ranks $(L < N)$. The interested
+reader should go to the methods section for more details.
+
+This R package implements the extended algorithm, which Wagner calls "XL-mHG".
+A Cython implementation of the extended algorithm is described in
+[@Wagner2015-ub] and is available [here][3].
+
 [3]: https://github.com/flo-compbio/xlmhg
 
-## Example
+# Example
 
 Run the enrichment test like this:
 
@@ -122,3 +141,5 @@ genes instead, then we can reverse the list of genes by sorting in decreasing
 order, and then repeat the test. If we wish to test genes with large
 fold-change in either direction, then we can take the absolute value of log
 fold-change, rank the genes in decreasing order, and then repeat the test.
+
+# References

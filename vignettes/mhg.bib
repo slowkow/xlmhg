@@ -1,0 +1,135 @@
+@ARTICLE{Eden2007-af,
+  title       = "Discovering motifs in ranked lists of {DNA} sequences",
+  author      = "Eden, Eran and Lipson, Doron and Yogev, Sivan and Yakhini,
+                 Zohar",
+  affiliation = "Computer Science Department, Technion, Haifa, Israel.
+                 eraneden@cs.technion.ac.il",
+  abstract    = "Computational methods for discovery of sequence elements that
+                 are enriched in a target set compared with a background set
+                 are fundamental in molecular biology research. One example is
+                 the discovery of transcription factor binding motifs that are
+                 inferred from ChIP-chip (chromatin immuno-precipitation on a
+                 microarray) measurements. Several major challenges in sequence
+                 motif discovery still require consideration: (i) the need for
+                 a principled approach to partitioning the data into target and
+                 background sets; (ii) the lack of rigorous models and of an
+                 exact p-value for measuring motif enrichment; (iii) the need
+                 for an appropriate framework for accounting for motif
+                 multiplicity; (iv) the tendency, in many of the existing
+                 methods, to report presumably significant motifs even when
+                 applied to randomly generated data. In this paper we present a
+                 statistical framework for discovering enriched sequence
+                 elements in ranked lists that resolves these four issues. We
+                 demonstrate the implementation of this framework in a software
+                 application, termed DRIM (discovery of rank imbalanced
+                 motifs), which identifies sequence motifs in lists of ranked
+                 DNA sequences. We applied DRIM to ChIP-chip and CpG
+                 methylation data and obtained the following results. (i)
+                 Identification of 50 novel putative transcription factor (TF)
+                 binding sites in yeast ChIP-chip data. The biological function
+                 of some of them was further investigated to gain new insights
+                 on transcription regulation networks in yeast. For example,
+                 our discoveries enable the elucidation of the network of the
+                 TF ARO80. Another finding concerns a systematic TF binding
+                 enhancement to sequences containing CA repeats. (ii) Discovery
+                 of novel motifs in human cancer CpG methylation data.
+                 Remarkably, most of these motifs are similar to DNA sequence
+                 elements bound by the Polycomb complex that promotes histone
+                 methylation. Our findings thus support a model in which
+                 histone methylation and CpG methylation are mechanistically
+                 linked. Overall, we demonstrate that the statistical framework
+                 embodied in the DRIM software tool is highly effective for
+                 identifying regulatory sequence elements in a variety of
+                 applications ranging from expression and ChIP-chip to CpG
+                 methylation data. DRIM is publicly available at
+                 http://bioinfo.cs.technion.ac.il/drim.",
+  journal     = "PLoS Comput. Biol.",
+  volume      =  3,
+  number      =  3,
+  pages       = "e39",
+  month       =  "23~" # mar,
+  year        =  2007,
+  issn        = "1553-734X, 1553-7358",
+  pmid        = "17381235",
+  doi         = "10.1371/journal.pcbi.0030039",
+  pmc         = "PMC1829477"
+}
+@ARTICLE{Wagner2015-ub,
+  title    = "{GO-PCA}: An Unsupervised Method to Explore Biological
+              Heterogeneity Based on Gene Expression and Prior Knowledge",
+  author   = "Wagner, Florian",
+  abstract = "Genome-wide expression profiling is a cost-efficient and widely
+              used method to characterize heterogeneous populations of cells,
+              tissues, biopsies, or other biological specimen. The exploratory
+              analysis of such datasets typically relies on generic
+              unsupervised methods, e.g. principal component analysis or
+              hierarchical clustering. However, generic methods fail to exploit
+              the significant amount of knowledge that exists about the
+              molecular functions of genes. Here, I introduce GO-PCA, an
+              unsupervised method that incorporates prior knowledge about gene
+              functions in the form of gene ontology (GO) annotations. GO-PCA
+              aims to discover and represent biological heterogeneity along all
+              major axes of variation in a given dataset, while suppressing
+              heterogeneity due to technical biases. To this end, GO-PCA
+              combines principal component analysis (PCA) with nonparametric GO
+              enrichment analysis, and uses the results to generate expression
+              signatures based on small sets of functionally related genes. I
+              first applied GO-PCA to expression data from diverse lineages of
+              the human hematopoietic system, and obtained a small set of
+              signatures that captured known cell characteristics for most
+              lineages. I then applied the method to expression profiles of
+              glioblastoma (GBM) tumor biopsies, and obtained signatures that
+              were strongly associated with multiple previously described GBM
+              subtypes. Surprisingly, GO-PCA discovered a cell cycle-related
+              signature that exhibited significant differences between the
+              Proneural and the prognostically favorable GBM CpG Island
+              Methylator (G-CIMP) subtypes, suggesting that the G-CIMP subtype
+              is characterized in part by lower mitotic activity. Previous
+              expression-based classifications have failed to separate these
+              subtypes, demonstrating that GO-PCA can detect heterogeneity that
+              is missed by other methods. My results show that GO-PCA is a
+              powerful and versatile expression-based method that facilitates
+              exploration of large-scale expression data, without requiring
+              additional types of experimental data. The low-dimensional
+              representation generated by GO-PCA lends itself to
+              interpretation, hypothesis generation, and further analysis.",
+  journal  = "bioRxiv",
+  month    =  "30~" # apr,
+  year     =  2015,
+  doi      = "10.1101/018705"
+}
+@ARTICLE{Rivals2007-vx,
+  title       = "Enrichment or depletion of a {GO} category within a class of
+                 genes: which test?",
+  author      = "Rivals, Isabelle and Personnaz, L\'{e}on and Taing, Lieng and
+                 Potier, Marie-Claude",
+  affiliation = "Equipe de Statistique Appliqu\'{e}e, 10 rue Vauquelin, 75005
+                 Paris, France. isabelle.rivals@espci.fr",
+  abstract    = "MOTIVATION: A number of available program packages determine
+                 the significant enrichments and/or depletions of GO categories
+                 among a class of genes of interest. Whereas a correct
+                 formulation of the problem leads to a single exact null
+                 distribution, these GO tools use a large variety of
+                 statistical tests whose denominations often do not clarify the
+                 underlying P-value computations. SUMMARY: We review the
+                 different formulations of the problem and the tests they lead
+                 to: the binomial, chi2, equality of two probabilities,
+                 Fisher's exact and hypergeometric tests. We clarify the
+                 relationships existing between these tests, in particular the
+                 equivalence between the hypergeometric test and Fisher's exact
+                 test. We recall that the other tests are valid only for large
+                 samples, the test of equality of two probabilities and the
+                 chi2-test being equivalent. We discuss the appropriateness of
+                 one- and two-sided P-values, as well as some discreteness and
+                 conservatism issues. SUPPLEMENTARY INFORMATION: Supplementary
+                 data are available at Bioinformatics online.",
+  journal     = "Bioinformatics",
+  volume      =  23,
+  number      =  4,
+  pages       = "401--407",
+  month       =  "15~" # feb,
+  year        =  2007,
+  issn        = "1367-4803, 1367-4811",
+  pmid        = "17182697",
+  doi         = "10.1093/bioinformatics/btl633"
+}
