@@ -7,23 +7,19 @@
 using namespace Rcpp;
 
 // mhg_test
-Rcpp::List mhg_test(arma::vec x, int N, int K, int L, int X, bool upper_bound = false, long double tol = 0.0000000000000001);
+Rcpp::List mhg_test(arma::vec x, int N, int K, int L, int X, bool upper_bound, long double tol);
 RcppExport SEXP mhg_mhg_test(SEXP xSEXP, SEXP NSEXP, SEXP KSEXP, SEXP LSEXP, SEXP XSEXP, SEXP upper_boundSEXP, SEXP tolSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< arma::vec >::type x(xSEXP );
-        Rcpp::traits::input_parameter< int >::type N(NSEXP );
-        Rcpp::traits::input_parameter< int >::type K(KSEXP );
-        Rcpp::traits::input_parameter< int >::type L(LSEXP );
-        Rcpp::traits::input_parameter< int >::type X(XSEXP );
-        Rcpp::traits::input_parameter< bool >::type upper_bound(upper_boundSEXP );
-        Rcpp::traits::input_parameter< long double >::type tol(tolSEXP );
-        Rcpp::List __result = mhg_test(x, N, K, L, X, upper_bound, tol);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< arma::vec >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type N(NSEXP);
+    Rcpp::traits::input_parameter< int >::type K(KSEXP);
+    Rcpp::traits::input_parameter< int >::type L(LSEXP);
+    Rcpp::traits::input_parameter< int >::type X(XSEXP);
+    Rcpp::traits::input_parameter< bool >::type upper_bound(upper_boundSEXP);
+    Rcpp::traits::input_parameter< long double >::type tol(tolSEXP);
+    __result = Rcpp::wrap(mhg_test(x, N, K, L, X, upper_bound, tol));
+    return __result;
 END_RCPP
 }
